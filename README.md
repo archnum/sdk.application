@@ -1,0 +1,2 @@
+# sdk.application
+AFAIRE
