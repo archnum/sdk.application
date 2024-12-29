@@ -13,6 +13,7 @@ import (
 	"github.com/archnum/sdk.base/failure"
 	"github.com/archnum/sdk.base/kv"
 	"github.com/archnum/sdk.base/tracer"
+	"github.com/archnum/sdk.base/util"
 )
 
 type (
@@ -52,6 +53,21 @@ func (impl *implContainer) AddComponents(cs ...component.Component) {
 	impl.cs = cs
 }
 
+func safeRun(fn func() error) (err error) {
+	defer func() {
+		if data := recover(); data != nil {
+			err = failure.New( /////////////////////////////////////////////////////////////////////////////////////////
+				"Recovered error",
+				kv.Any("data", data),
+				kv.String("stack", util.Stack(5)),
+			)
+		}
+	}()
+
+	err = fn()
+	return
+}
+
 func (impl *implContainer) Run(cs ...string) error {
 	var buildClose int
 
@@ -61,7 +77,7 @@ func (impl *implContainer) Run(cs ...string) error {
 
 			tracer.Log("Component", kv.String(cpt.Name(), "Close")) //::::::::::::::::::::::::::::::::::::::::::::::::::
 
-			if err := cpt.Close(); err != nil {
+			if err := safeRun(cpt.Close); err != nil {
 				log.Print( //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 					failure.WithMessage(
 						err,
@@ -77,7 +93,7 @@ func (impl *implContainer) Run(cs ...string) error {
 	for _, cpt := range impl.cs {
 		tracer.Log("Component", kv.String(cpt.Name(), "Build")) //::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-		if err := cpt.Build(); err != nil {
+		if err := safeRun(cpt.Build); err != nil {
 			if err == failure.NoError {
 				return nil
 			}
@@ -103,7 +119,7 @@ func (impl *implContainer) Run(cs ...string) error {
 
 			tracer.Log("Component", kv.String(cpt.Name(), "Stop")) //:::::::::::::::::::::::::::::::::::::::::::::::::::
 
-			if err := cpt.Stop(); err != nil {
+			if err := safeRun(cpt.Stop); err != nil {
 				log.Print( //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 					failure.WithMessage(
 						err,
@@ -124,7 +140,7 @@ func (impl *implContainer) Run(cs ...string) error {
 
 		tracer.Log("Component", kv.String(cpt.Name(), "Start")) //::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-		if err := cpt.Start(); err != nil {
+		if err := safeRun(cpt.Start); err != nil {
 			if err == failure.NoError {
 				return nil
 			}
