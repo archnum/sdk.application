@@ -42,6 +42,7 @@ func (impl *implComponent) Build() error {
 	cfg := config(c)
 
 	impl.logger = logger.New(app.ID(), app.Name())
+	impl.logger.Register()
 
 	if cfg.Level != "" {
 		impl.logger.SetLevel(level.StringToLevel(cfg.Level))
