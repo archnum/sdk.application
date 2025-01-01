@@ -78,10 +78,10 @@ func (impl *implContainer) Run(cs ...string) error {
 			tracer.Log("Component", kv.String(cpt.Name(), "Close")) //::::::::::::::::::::::::::::::::::::::::::::::::::
 
 			if err := safeRun(cpt.Close); err != nil {
-				log.Print( //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				log.Print( /////////////////////////////////////////////////////////////////////////////////////////////
 					failure.WithMessage(
 						err,
-						"an error occurred",
+						"An error occurred",
 						kv.String("component", cpt.Name()),
 						kv.String("func", "Close"),
 					).Error(),
@@ -120,10 +120,10 @@ func (impl *implContainer) Run(cs ...string) error {
 			tracer.Log("Component", kv.String(cpt.Name(), "Stop")) //:::::::::::::::::::::::::::::::::::::::::::::::::::
 
 			if err := safeRun(cpt.Stop); err != nil {
-				log.Print( //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+				log.Print( /////////////////////////////////////////////////////////////////////////////////////////////
 					failure.WithMessage(
 						err,
-						"an error occurred",
+						"An error occurred",
 						kv.String("component", cpt.Name()),
 						kv.String("func", "Stop"),
 					).Error(),
