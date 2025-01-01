@@ -9,8 +9,8 @@ import "github.com/archnum/sdk.application/container"
 
 type (
 	Config struct {
-		Level  string `dm:"level"`
-		Output string `dm:"output"`
+		Level  string `ms:"level"`
+		Output string `ms:"output"`
 	}
 
 	configProvider interface {
