@@ -8,10 +8,8 @@ package container
 import (
 	"fmt"
 
-	"github.com/archnum/sdk.base/crypto"
 	"github.com/archnum/sdk.base/failure"
 	"github.com/archnum/sdk.base/kv"
-	"github.com/archnum/sdk.base/logger"
 )
 
 func Value[T any](c Container, name string) T {
@@ -35,14 +33,6 @@ func Value[T any](c Container, name string) T {
 	}
 
 	return value
-}
-
-func Crypto(c Container) crypto.Crypto {
-	return Value[crypto.Crypto](c, "crypto")
-}
-
-func Logger(c Container) *logger.Logger {
-	return Value[*logger.Logger](c, "logger")
 }
 
 /*

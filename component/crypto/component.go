@@ -18,6 +18,7 @@ import (
 )
 
 const (
+	_name       = "crypto"
 	_rootFolder = "/var/lib"
 )
 
@@ -29,7 +30,7 @@ type (
 
 func New(c container.Container) *implComponent {
 	return &implComponent{
-		Component: container.NewComponent("crypto", c),
+		Component: container.NewComponent(_name, c),
 	}
 }
 
@@ -50,6 +51,10 @@ func (impl *implComponent) readFile() (string, error) {
 	}
 
 	return string(key), nil
+}
+
+func Value(c container.Container) crypto.Crypto {
+	return container.Value[crypto.Crypto](c, _name)
 }
 
 //////////////////////

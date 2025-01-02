@@ -18,6 +18,10 @@ import (
 	"github.com/archnum/sdk.application/container"
 )
 
+const (
+	_name = "logger"
+)
+
 type (
 	implComponent struct {
 		*container.Component
@@ -27,8 +31,12 @@ type (
 
 func New(c container.Container) *implComponent {
 	return &implComponent{
-		Component: container.NewComponent("logger", c),
+		Component: container.NewComponent(_name, c),
 	}
+}
+
+func Value(c container.Container) *logger.Logger {
+	return container.Value[*logger.Logger](c, _name)
 }
 
 //////////////////////
