@@ -75,7 +75,7 @@ func (impl *implComponent) Build() error {
 
 	impl.logger.Info( //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 		"APP",
-		kv.String("id", string(app.ID())),
+		kv.String("id", app.ID().String()),
 		kv.String("name", app.Name()),
 		kv.String("version", app.Version()),
 		kv.Time("builtAt", app.BuiltAt()),
