@@ -14,6 +14,10 @@ import (
 	"github.com/archnum/sdk.application/container"
 )
 
+const (
+	Name = "waitend"
+)
+
 type (
 	implComponent struct {
 		*container.Component
@@ -22,7 +26,7 @@ type (
 
 func New(c container.Container) *implComponent {
 	return &implComponent{
-		Component: container.NewComponent("waitend", c),
+		Component: container.NewComponent(Name, c),
 	}
 }
 
