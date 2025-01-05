@@ -30,9 +30,9 @@ func New(c container.Container) *implComponent {
 	}
 }
 
-//////////////////////
-/// Implementation ///
-//////////////////////
+/////////////////
+/// Component ///
+/////////////////
 
 func (impl *implComponent) Start() error {
 	signals := []os.Signal{syscall.SIGABRT, syscall.SIGQUIT, syscall.SIGTERM}

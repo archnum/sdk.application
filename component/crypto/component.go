@@ -57,9 +57,9 @@ func Value(c container.Container) crypto.Crypto {
 	return container.Value[crypto.Crypto](c, _name)
 }
 
-//////////////////////
-/// Implementation ///
-//////////////////////
+/////////////////
+/// Component ///
+/////////////////
 
 func (impl *implComponent) Build() error {
 	crypto := crypto.New()

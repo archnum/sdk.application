@@ -29,9 +29,9 @@ func New(c container.Container, builder Builder) *implComponent {
 	}
 }
 
-//////////////////////
-/// Implementation ///
-//////////////////////
+/////////////////
+/// Component ///
+/////////////////
 
 func (impl *implComponent) Build() error {
 	cmdline, err := impl.builder()

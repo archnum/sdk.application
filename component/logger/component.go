@@ -39,9 +39,9 @@ func Value(c container.Container) *logger.Logger {
 	return container.Value[*logger.Logger](c, _name)
 }
 
-//////////////////////
-/// Implementation ///
-//////////////////////
+/////////////////
+/// Component ///
+/////////////////
 
 func (impl *implComponent) Build() error {
 	c := impl.C()
